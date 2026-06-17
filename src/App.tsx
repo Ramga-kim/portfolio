@@ -212,134 +212,6 @@ const projectDetails: Record<string, ProjectDetail> = {
       { layer: "Automation", tech: ["Codex Skill", "CLI", "Validation"] },
       { layer: "Output", tech: ["CSV Mapping", "T-DataServer", "Config generation"] }
     ]
-  },
-  "closed-network-onlinetsi": {
-    id: "project-closed-network-onlinetsi",
-    problem:
-      "OnlineTSI는 폐쇄망 환경에서 설치, 복구, 네트워크 분리, 운영 문서 검증까지 고려해야 하는 솔루션이었습니다. 인터넷 연결을 전제로 한 일반 배포 방식으로는 운영 안정성을 보장하기 어려웠습니다.",
-    role:
-      "폐쇄망 솔루션 운영 조건을 기준으로 설치/복구 이미지, DHCP/네트워크 구성, 문서 검증, 배포 체크리스트를 정리했습니다.",
-    actions: [
-      "폐쇄망 OnlineTSI 운영 환경과 일반 Edge Computing 경험을 분리해 정리",
-      "UWF, golden image, 복구 전략처럼 현장 운영 안정성에 필요한 항목 검토",
-      "DHCP와 네트워크 분리 조건을 설치 체크리스트에 반영",
-      "원본 사양서와 운영 문서를 대조해 설치 절차의 누락 위험 확인",
-      "민감한 접속 정보는 포트폴리오/챗봇 KB에서 배제"
-    ],
-    outcomes: [
-      "폐쇄망 특유의 배포 제약을 이해하고, 운영 가능한 형태로 솔루션을 묶는 경험 확보",
-      "보안/망분리 환경에서 문서, 이미지, 네트워크, 복구 절차가 함께 중요하다는 점을 체득",
-      "Enhans 관점에서는 고객 환경에 임베딩되어 제품 적용 조건을 정의하는 FDE 역량으로 연결"
-    ],
-    dataFlow: [
-      { label: "폐쇄망 설치 환경", meta: "offline site, isolated network" },
-      { label: "시스템 이미지", meta: "golden image, restore plan" },
-      { label: "운영 보호", meta: "UWF, controlled changes" },
-      { label: "네트워크 구성", meta: "DHCP, topology, separation" },
-      { label: "검증 문서", meta: "install checklist, O&M evidence" }
-    ],
-    layers: [
-      { layer: "Environment", tech: ["Closed network", "Windows", "OnlineTSI"] },
-      { layer: "Provisioning", tech: ["Golden Image", "Snapshot", "Installer"] },
-      { layer: "Ops Control", tech: ["UWF", "DHCP", "Network isolation"] },
-      { layer: "Evidence", tech: ["Checklist", "O&M Manual", "Spec review"] }
-    ]
-  },
-  "industrial-interface-playbook": {
-    id: "project-industrial-interface-playbook",
-    problem:
-      "산업 현장 데이터는 OPC DA/UA, Modbus, gRPC, REST, HSMS처럼 서로 다른 인터페이스를 지나갑니다. 데이터가 끊기면 프로토콜 이름보다 태그 의미, 주소, 채널, 수집 주기, 운영 화면의 기대값을 함께 봐야 했습니다.",
-    role:
-      "여러 프로젝트에서 다룬 인터페이스 경험을 장비-어댑터-서버-DB-화면의 공통 플레이북으로 정리했습니다.",
-    actions: [
-      "DCS, PLC, 게이트웨이, 서버 사이의 데이터 링크 구조 확인",
-      "OPC DA/UA, Modbus TCP, REST, gRPC, HSMS의 역할과 제약을 프로젝트 단위로 구분",
-      "태그, 주소 offset, 채널, 레지스터 제한을 운영 데이터 의미에 맞춰 정렬",
-      "로컬 수집 값과 원격 화면 값의 차이를 비교해 계층별 원인 분리",
-      "프로토콜 경험을 Enhans의 Ontology/Workflow 언어로 번역"
-    ],
-    outcomes: [
-      "OPC, Modbus, REST, gRPC, HSMS를 단순 나열이 아니라 데이터 흐름 관점으로 설명 가능",
-      "고객 요구를 장비 데이터 의미와 운영 화면 기대값으로 바꾸는 역량을 포트폴리오 중심축으로 정리",
-      "Enhans 관점에서는 이기종 시스템을 데이터 의미 기준으로 통합하는 솔루션 감각으로 연결"
-    ],
-    dataFlow: [
-      { label: "장비/DCS/PLC", meta: "field device, gateway" },
-      { label: "프로토콜 어댑터", meta: "OPC DA/UA, Modbus, HSMS" },
-      { label: "서비스 레이어", meta: "T-DataServer, Edge service" },
-      { label: "저장/API", meta: "RTDB, REST, gRPC" },
-      { label: "운영 표면", meta: "Viewer, report, dashboard" }
-    ],
-    layers: [
-      { layer: "Protocol", tech: ["OPC DA", "OPC UA", "Modbus TCP", "HSMS"] },
-      { layer: "Service", tech: ["T-DataServer", "Gateway", "Edge Server"] },
-      { layer: "API/Data", tech: ["REST", "gRPC", "RTDB"] },
-      { layer: "Meaning", tech: ["Tag mapping", "Address offset", "Channel model"] }
-    ]
-  },
-  "edge-computing-platform": {
-    id: "project-edge-computing-platform",
-    problem:
-      "Edge Computing 환경에서는 데이터 수집 서비스가 떠 있어도 운영 화면까지 값이 보인다는 보장은 없습니다. 서비스, API, DB, 시각화 레이어를 함께 확인해야 했습니다.",
-    role:
-      "DtEdgeServer와 시계열/시각화 스택을 운영 관점에서 검증하고, 원격 화면 미표시 같은 문제를 데이터 경로 기준으로 좁혔습니다.",
-    actions: [
-      "Edge service 배포와 시작 상태 확인",
-      "REST endpoint로 최신 태그 데이터 수집 상태 검증",
-      "RTDB와 InfluxDB/Grafana 같은 조회 레이어의 역할 분리",
-      "로컬 장비 데이터와 원격 화면 데이터 차이 비교",
-      "배포 버전과 서비스 상태를 운영 점검 기록으로 남김"
-    ],
-    outcomes: [
-      "DtEdgeServer v1.0.2 배포 검증과 TMS 원격 데이터 미표시 분석 기록 보유",
-      "Edge Computing은 폐쇄망과 별개의 경험으로 분리해 설명",
-      "Enhans 관점에서는 데이터가 운영 화면까지 도달하는지 검증하는 data readiness 솔루션 경험으로 연결"
-    ],
-    dataFlow: [
-      { label: "현장 데이터 스트림", meta: "machine tag, sensor value" },
-      { label: "Edge Service", meta: "DtEdgeServer, Windows Service" },
-      { label: "API/저장", meta: "REST, RTDB, time-series DB" },
-      { label: "관측/시각화", meta: "Grafana, InfluxDB, QuestDB" },
-      { label: "운영 판단", meta: "remote screen, status check" }
-    ],
-    layers: [
-      { layer: "Runtime", tech: [".NET", "Windows Service", "Edge Computing"] },
-      { layer: "Data", tech: ["RTDB", "InfluxDB", "QuestDB"] },
-      { layer: "Interface", tech: ["REST API", "Tag endpoint", "Status API"] },
-      { layer: "Observability", tech: ["Grafana", "Remote screen", "Service check"] }
-    ]
-  },
-  "firmware-root-cause": {
-    id: "project-firmware-root-cause",
-    problem:
-      "장비 명령은 전송되지만 응답이 늦거나 누락되고, 서버와 펌웨어가 같은 데이터를 다르게 해석하는 문제가 있었습니다. 원인은 timeout만이 아니라 binary layout과 언어별 타입 차이일 수 있었습니다.",
-    role:
-      "C#/C++ 경계의 request-response 흐름을 재현 가능한 단위로 쪼개고, wire format과 구조체 정렬 문제까지 내려가 원인을 좁혔습니다.",
-    actions: [
-      "VDPM/AlphaPoint 계열 재설정 명령 흐름 분석",
-      "응답 지연 상황에서 timeout과 resync 전략 검토",
-      "C# BinaryWriter와 C++ BOOL 크기 차이로 인한 layout 불일치 파악",
-      "KP board request-response 흐름을 로그와 프로토콜 단위로 분해",
-      "펌웨어/호스트 경계에서 데이터가 깨지는 지점을 문서화"
-    ],
-    outcomes: [
-      "SendConfigs/Reconfig protocol, KP board request-response, C#과 C++ binary layout 차이 분석 기록 보유",
-      "애매한 통신 문제를 로그, wire format, 실행 순서로 좁히는 low-level debugging 역량 제시",
-      "Enhans 관점에서는 외부 시스템 연결이 실패할 때 끝까지 원인을 추적하는 integration 안정성 경험으로 연결"
-    ],
-    dataFlow: [
-      { label: "사양/명령 정의", meta: "protocol spec, command ID" },
-      { label: "Host 요청", meta: "C#, BinaryWriter" },
-      { label: "Wire Format", meta: "binary layout, type size" },
-      { label: "Firmware 응답", meta: "C++, board state" },
-      { label: "재동기화", meta: "timeout, resync, logging" }
-    ],
-    layers: [
-      { layer: "Host", tech: ["C#", "BinaryWriter", "Request-response"] },
-      { layer: "Firmware", tech: ["C++", "Board protocol", "State handling"] },
-      { layer: "Transport", tech: ["Binary Protocol", "Timeout", "Resync"] },
-      { layer: "Debug", tech: ["Wire format", "Log analysis", "Root cause"] }
-    ]
   }
 };
 
@@ -396,7 +268,7 @@ const fitLenses = [
     term: "Protocol Integration",
     title: "여러 프로토콜 데이터 인터페이싱 경험",
     text: "OPC DA/UA, Modbus TCP, REST, gRPC, HSMS 등 서로 다른 산업 인터페이스를 장비-서버-운영 화면 흐름으로 연결했습니다.",
-    anchor: "project-industrial-interface-playbook"
+    anchor: "project-modbus-mapping-skill"
   }
 ];
 
@@ -415,11 +287,11 @@ const scriptedIntents = [
 const promptChips = [
   ["요구사항 추출", "요구사항 추출이 무슨 뜻이야?"],
   ["Enhans Fit", "Enhans FDE에 적합한 이유가 뭐야?"],
-  ["데이터 플로우", "프로젝트별 데이터 플로우와 레이어 스택을 설명해줘"],
+  ["경력", "어떤 회사에서 무슨 일을 했어?"],
+  ["청송양수", "청송양수 고진동 프로젝트 설명해줘"],
   ["경주풍력 DT", "경주풍력 Digital Twin 프로젝트를 설명해줘"],
-  ["폐쇄망", "폐쇄망 OnlineTSI와 Edge Computing 경험 차이를 설명해줘"],
   ["Modbus Skill", "Modbus Mapping Skill 프로젝트를 설명해줘"],
-  ["펌웨어 디버깅", "펌웨어/프로토콜 디버깅 경험을 설명해줘"]
+  ["데이터 플로우", "프로젝트별 데이터 플로우와 레이어 스택을 설명해줘"]
 ];
 
 const aboutSummary =
